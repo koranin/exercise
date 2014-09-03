@@ -8,7 +8,7 @@ Getting started
 ###Template details
 
 Item                | Type               |Example
---------------------|--------------------------------------------------------------
+--------------------|--------------------|------------------------------------------
 {question}          | Text               | 1. What is the capital city of Thailand?
 {question number}   | Number from 1 to n | 1
 {is correct choice} | Number 0 or 1      | 0
