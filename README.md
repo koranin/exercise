@@ -8,7 +8,6 @@ Getting started
 ###Adding the JavaScript tag to your HTML page
 
 ```xml
-
 <script>
 var showAnswer = function(questionNumber) {
 	document.getElementById(questionNumber).style.visibility = 'visible';
@@ -52,7 +51,6 @@ var checkAnswers = function(total) {
 };
 
 </script>
-
 ```
 
 
