@@ -5,43 +5,44 @@
 <script>
 var showAnswer = function(questionNumber) {
 	document.getElementById(questionNumber).style.visibility = 'visible';
-}
+};
+
+var showStatus = function(elem, correct) {
+	if (correct) {
+		elem.style.color = 'blue';
+		elem.innerHTML = 'correct';
+	} else {
+		elem.style.color = 'red';
+		elem.innerHTML = 'wrong';
+	}
+};
 
 var checkAnswers = function(total) {
 	for (var i = 1; i <= total; i++) {
 		var elems = document.getElementsByName(i.toString());
 		var correctElem = document.getElementById('c' + i);
 		if (elems.length == 1) {
-			var correct = document.getElementById('v' + i).value;
-			if (elems[0].value === correct) {
-				correctElem.style.color = 'blue';
-				correctElem.innerHTML = 'correct';
-			} else {
-				correctElem.style.color = 'red';
-				correctElem.innerHTML = 'wrong';
+			var elem = elems[0];
+			if (elem.nodeName === 'SELECT') { /*handling drop down*/
+			    showStatus(correctElem, elem.options[elem.selectedIndex].value === '1');
+			} else { /*handling fill in the blank*/
+				showStatus(correctElem, elem.value === document.getElementById('v' + i).value);
 			}
-		} else {
+		} else { /*handling multiple choice*/
 			var blank = true;
 			for (var j = 0; j < elems.length; j++) {
 				if (elems[j].checked) {
-					if (elems[j].value === '1'){
-						correctElem.style.color = 'blue';
-						correctElem.innerHTML = 'correct';
-					} else {
-						correctElem.style.color = 'red';
-						correctElem.innerHTML = 'wrong';
-					}
+					showStatus(correctElem, elems[j].value === '1');
 					blank = false;
 					break;
 				}
 			}
 			if (blank) {
-				correctElem.style.color = 'red';
-				correctElem.innerHTML = 'wrong';
+				showStatus(correctElem, false);
 			}
 		}
 	}
-}
+};
 
 </script>
 </head>
@@ -54,16 +55,14 @@ var checkAnswers = function(total) {
 <p><div id="c1" ></div></p>
 <p><button onClick = "showAnswer('a1')">Answer</button></p>
 <div id="a1" style="visibility:hidden;">the answer is 2</div>
-<p><iframe width="550" height="344" src="http://www.youtube.com/embed/_nAoMjr-w2Q" frameborder="0" allowfullscreen></iframe></p>
-<p><iframe width="550" height="344" src="http://www.youtube.com/embed/iNWYrcsE6p4" frameborder="0" allowfullscreen></iframe></p>
 <br>
 
 <p>2. What is 4 * 4?</p>
 <p><input type="text" name="2">
+<input type="hidden" id="v2" value="16" />
 <p><div id="c2" ></div></p>
 <p><button onClick = "showAnswer('a2')">Answer</button></p>
 <div id="a2" style="visibility:hidden;">the answer is 16</div>
-<input type="hidden" id="v2" value="16" />
 
 <p>3. If 2X - 1 = 9, what is X?</p>
 <p><input type="radio" name="3" value="1">5</p>
@@ -75,12 +74,24 @@ var checkAnswers = function(total) {
 
 <p>4. What is 4 - 5?</p>
 <p><input type="text" name="4">
+<input type="hidden" id="v4" value="-1" />
 <p><div id="c4" ></div></p>
 <p><button onClick = "showAnswer('a4')">Answer</button></p>
 <div id='a4' style='visibility:hidden;'>the answer is -1</div>
-<input type="hidden" id="v4" value="-1" />
 
-<p><button onClick = "checkAnswers(4)">Check</button></p>
+
+<p>5. What is 9/3?</p>
+<p><select name="5">
+  <option value="0"></option>
+  <option value="0">1</option>
+  <option value="0">2</option>
+  <option value="1">3</option>
+</select>
+<p><div id="c5" ></div></p>
+<p><button onClick = "showAnswer('a5')">Answer</button></p>
+<div id='a5' style='visibility:hidden;'>the answer is 3</div>
+
+<p><button onClick = "checkAnswers(5)">Check</button></p>
 
 
 </body>
