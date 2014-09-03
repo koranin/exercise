@@ -5,9 +5,7 @@ This is an HTML/JavaScript template for creating dynamic questions and answers w
 Getting started
 ---------------
 
-Replace appropriate values to the following the desire template
-
-Template values:
+###Template details
 
 Item                | Description
 --------------------|-------------
@@ -18,7 +16,7 @@ Item                | Description
 {answer}            | Text
 
 
-1. Creating multiple choice radio button
+###Creating multiple choice radio button
 
 Template
 
@@ -43,8 +41,7 @@ Example
 <p><button onClick = "showAnswer('a1')">Answer</button></p>
 <div id="a1" style="visibility:hidden;">the answer is 2</div>
 ```
-
-2. Creating multiple choice dropdown
+###Creating multiple choice dropdown
 
 Template
 
